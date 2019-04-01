@@ -16,7 +16,7 @@ Salida: tpo de usuario
 
 int checaTipoEmpleado(char* usuario,char* contrasena);
 int obtieneLinea(char* nombreEmp);
-//char * obtieneCadena(int linea);
+char * obtieneCadena(int linea);
 
 
 
@@ -107,5 +107,32 @@ int obtieneLinea(char* nombreEmp){
 	return 0;
 }
 
+char * obtieneCadena(int linea){
+	int i;
+	static char nombre[30];
+	int lines=0;
+	FILE *fp; //creamos apuntador a archivo
+
+	if( ( fp = fopen("empleados","r") ) == NULL )//comprueba que haya un archivo con nombre archivo.txt que se pueda leer
+	printf("Error al leer el archivo.");
+
+	else{
+	while (!feof(fp))
+	{
+		
+
+		fscanf(fp, "%s\n", nombre);
+		lines++;
+		if(lines==linea-1)
+		{
+			fclose(fp);
+			return nombre;	
+		}
+		
+	}
+	}
+	fclose(fp); //cierra el archivo 
+	return nombre;
+}
 
 
